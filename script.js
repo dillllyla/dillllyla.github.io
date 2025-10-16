@@ -1,27 +1,6 @@
 
 // Small helpers for this mini site
 (function() {
-// Hamburger menu logic
-document.addEventListener('DOMContentLoaded', () => {
-  const navToggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('.nav');
-  if (navToggle && nav) {
-    navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-    });
-    // Optional: close nav when link clicked (on mobile)
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-});
-
-// ...existing code...
   // Set active nav link
   const navLinks = document.querySelectorAll('.nav a');
   const here = location.pathname.split('/').pop() || 'index.html';
@@ -146,3 +125,71 @@ document.querySelectorAll("a[href]").forEach(link => {
     }, 500); // sama dengan durasi CSS transition
   });
 });
+
+// --- Reveal on scroll (fade-in, prioritized + queued) ---
+(() => {
+  const itemsAll = Array.from(document.querySelectorAll('.reveal'));
+  if (!itemsAll.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    itemsAll.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+
+  // Prioritize the song card that contains "About You"
+  const aboutHeading = Array.from(document.querySelectorAll('.song-card h3'))
+    .find(h3 => /about you/i.test(h3.textContent || ''));
+  const aboutCard = aboutHeading ? aboutHeading.closest('.song-card') : null;
+
+  // Keep processing to one-at-a-time with a minimum gap
+  const minGap = 700; // ms between reveals (slower, not all at once)
+  let lastRevealAt = 0;
+  let processing = false;
+  const queue = [];
+  const revealed = new WeakSet();
+
+  const processQueue = () => {
+    if (processing) return;
+    processing = true;
+
+    const step = () => {
+      if (!queue.length) { processing = false; return; }
+
+      // If About You hasn't revealed yet and is in queue, do it first
+      let idx = 0;
+      if (aboutCard && !revealed.has(aboutCard)) {
+        const i = queue.indexOf(aboutCard);
+        if (i >= 0) idx = i;
+      }
+
+      const now = performance.now();
+      const wait = Math.max(0, minGap - (now - lastRevealAt));
+      setTimeout(() => {
+        const el = queue.splice(idx, 1)[0];
+        el.classList.add('in-view');
+        revealed.add(el);
+        lastRevealAt = performance.now();
+        io.unobserve(el);
+        step();
+      }, wait);
+    };
+
+    step();
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (revealed.has(el)) { io.unobserve(el); return; }
+      if (!queue.includes(el)) queue.push(el);
+    });
+    processQueue();
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -15% 0px'
+  });
+
+  itemsAll.forEach(el => io.observe(el));
+})();
