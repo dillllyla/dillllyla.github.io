@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siti Fadila — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+  <div id="page-content" class="page-transition">
+  <div class="wrapper">
+    <div class="card">
+      
+  <header class="site-header">
+    <div class="brand">
+      Universitas Negeri Makassar
+      <small>Personal Site · Siti Fadila</small>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contacts.html">Contacts</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+      <section class="hero mt-m">
+        <div class="intro">
+          <p class="pill">PTIK D24 · Informatika & Komputer</p>
+          <h1>Hello, I’m <br/>Siti Fadila</h1>
+          <p>Selamat datang di personal space-ku! I’m a Computer & Informatics Education student yang passionate banget tentang teknologi, belajar bareng, dan bikin hal-hal keren. Let’s make tech simple & fun.</p>
+          <div class="actions">
+            <a class="btn primary" href="about.html">Read more</a>
+            <a class="btn light" href="contacts.html">Contact</a>
+          </div>
+        </div>
+        <div class="blob">
+          <img src="assets/profile-1.png" alt="Foto profil Siti Fadila" />
+        </div>
+      </section>
+
+       <h2 class="section-title mt-l">Fav Songs</h2>
+  <div class="songs">
+    <article class="song-card reveal">
+      <img src="assets/song-1.jpg" alt="Cover lagu Nadhif – Bergema Sampai Selamanya"/>
+      <div class="song-content">
+        <div>
+          <h3>Bergema Sampai Selamanya — Nadhif</h3>
+          <p class="small">One of my favs to focus ✨</p>
+        </div>
+        <button class="btn play-btn" data-audio="assets/song-1.mp3">Play</button>
+      </div>
+    </article>
+
+  <article class="song-card reveal">
+      <img src="assets/song-2.jpg" alt="Cover lagu Matty Healy – About You"/>
+      <div class="song-content">
+        <div>
+          <h3>About You — Matty Healy</h3>
+          <p class="small">Chill vibes for study time.</p>
+        </div>
+        <button class="btn play-btn" data-audio="assets/song-2.mp3">Play</button>
+      </div>
+    </article>
+
+  <article class="song-card reveal">
+      <img src="assets/song-3.jpg" alt="Cover lagu Kahlita & Monita Tahalea – Titik Nadir"/>
+      <div class="song-content">
+        <div>
+          <h3>Titik Nadir — Kahlita & Monita Tahalea</h3>
+          <p class="small">All-time mood booster ♫</p>
+        </div>
+        <button class="btn play-btn" data-audio="assets/song-3.mp3">Play</button>
+      </div>
+    </article>
+  </div>
+
+
+  <footer class="footer">
+    <div class="small">Made by Siti Fadila · 2025</div>
+    <div class="socials">
+      <a class="icon" href="https://instagram.com/_ssfadila" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+      </a>
+      <a class="icon" href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V23h-4zM8 8h3.8v2.05h.05c.53-1 1.82-2.05 3.75-2.05 4.01 0 4.75 2.64 4.75 6.08V23h-4v-7.31c0-1.74-.03-3.98-2.43-3.98-2.43 0-2.8 1.9-2.8 3.86V23H8z"/></svg>
+      </a>
+      <a class="icon" href="mailto:sfadila099@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 5h20v14H2z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22 5l-10 7L2 5"/></svg>
+      </a>
+    </div>
+  </footer>
+
+    </div>
+  </div>
+</div>
+
+    <audio id="audio-player" preload="metadata" aria-hidden="true" tabindex="-1"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
